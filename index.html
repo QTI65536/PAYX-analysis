@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paychex (PAYX) — DSM Engine Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    background: #f4f3ef;
+    padding: 24px 16px;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem 2rem 2.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .eyebrow { font-size: 11px; color: #6b6b68; letter-spacing: .05em; text-transform: uppercase; margin-bottom: .25rem; }
+  .title { font-size: 26px; font-weight: 600; margin-bottom: .15rem; line-height: 1.3; }
+  .subtitle { font-size: 13px; color: #6b6b68; margin-bottom: 1.5rem; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 5px; letter-spacing: .03em; white-space: normal; max-width: 100%; }
+  .badge-wait { background: #fdf0dc; color: #92590f; }
+  .badge-core { background: #e3edfa; color: #1a5494; }
+  .badge-pass { background: #e3f2e8; color: #1e6b3b; }
+  .badge-warn { background: #fdf0dc; color: #92590f; }
+  .badge-neutral { background: #ececea; color: #555552; }
+  .hdr { font-size: 11px; font-weight: 700; color: #6b6b68; letter-spacing: .08em; text-transform: uppercase; margin: 1.75rem 0 .6rem; border-bottom: 1px solid #e2e1dc; padding-bottom: 5px; }
+  .verdict-block { border: 2px solid #b07a1e; border-radius: 10px; padding: 1.1rem 1.4rem; margin: 1rem 0; background: #fdf7ec; }
+  .verdict-title { font-size: 20px; font-weight: 700; color: #92590f; line-height: 1.35; }
+  .verdict-sub { font-size: 13px; color: #4a4a47; margin-top: 6px; line-height: 1.65; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: .5rem 0 1rem; table-layout: fixed; }
+  td, th { min-width: 0; }
+  th { text-align: left; color: #6b6b68; font-weight: 600; padding: 6px 8px; border-bottom: 1.5px solid #e2e1dc; word-wrap: break-word; }
+  td { padding: 6px 8px; border-bottom: 1px solid #ececea; vertical-align: top; line-height: 1.55; word-wrap: break-word; overflow-wrap: break-word; }
+  tr:last-child td { border-bottom: none; }
+  .red { color: #b3261e; font-weight: 600; }
+  .grn { color: #1e6b3b; font-weight: 600; }
+  .amb { color: #92590f; font-weight: 600; }
+  .section-note { font-size: 12.5px; color: #4a4a47; line-height: 1.65; margin: .5rem 0; }
+  .triline { border-left: 3px solid #d8d6cf; padding-left: .9rem; margin: .6rem 0; }
+  .triline-lbl { font-size: 11px; font-weight: 700; color: #6b6b68; text-transform: uppercase; letter-spacing:.06em; }
+  .triline-body { font-size: 13px; line-height: 1.65; margin-top: 3px; }
+  .adv { border: 1px solid #e2e1dc; border-radius: 8px; padding: .9rem 1.1rem; margin: .6rem 0; background: #f8f8f6; }
+  .adv-lbl { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #b3261e; margin-bottom: 5px; }
+  .sym-lbl { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #1e6b3b; margin: .6rem 0 4px; }
+  .adv-body { font-size: 13px; line-height: 1.65; color: #1a1a1a; }
+  .adv-body p { margin-bottom: .6rem; }
+  .adv-body p:last-child { margin-bottom: 0; }
+  .kv { display: flex; gap: 10px; margin: .35rem 0; font-size: 13px; flex-wrap: wrap; }
+  .kv-k { color: #6b6b68; min-width: 175px; flex-shrink: 0; }
+  .kv-v { font-weight: 600; flex: 1; min-width: 200px; }
+  .gate1box { border: 1px solid #e2e1dc; border-radius: 8px; padding: .9rem 1.1rem; margin: .6rem 0; background: #f8f8f6; }
+  .footer-note { margin-top: 1.5rem; font-size: 11px; color: #6b6b68; border-top: 1px solid #e2e1dc; padding-top: 10px; line-height: 1.6; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.25rem 1.1rem 1.75rem; }
+    .title { font-size: 21px; }
+    table, th, td { font-size: 11.5px; }
+    .kv-k { min-width: 130px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Hybrid Portfolio Architect V4.2.1 — DSM Engine</div>
+  <div class="title">Paychex (PAYX)</div>
+  <div class="subtitle">Human Resource &amp; Employment Services &middot; Analysis Date: June 30, 2026 &middot; Price: $98.33</div>
+
+  <div class="verdict-block">
+    <div class="verdict-title">&#8987; WAIT FOR STRIKE PRICE — HOLD for existing positions</div>
+    <div class="verdict-sub">Classification: CORE &middot; Strike: $81&ndash;$90 (Margin of Safety) / $90&ndash;$98 (Speculative Entry) &middot; Current price at $98.33 sits just above the top of the Speculative Entry tier — essentially at fair value under the Updated Base, not discounted</div>
+  </div>
+
+  <div class="hdr">Pre-Verdict Checklist — Gate 1: Data Freshness (Full Required Output)</div>
+  <div class="gate1box">
+    <div class="kv"><span class="kv-k">(a) VL report age</span><span class="kv-v">4 days (June 26, 2026) — current</span></div>
+    <div class="kv"><span class="kv-k">(b) Post-VL material developments</span><span class="kv-v amb">YES. Q4 FY26 earnings (June 24, 2026) reported after VL's report went to press with estimated figures. Actuals: Q4 adjusted EPS $1.32 (beat $1.31 consensus), revenue $1.61B (+12% YoY). Full-year FY26: revenue $6.51B (+17%), adjusted EPS $5.51 (+11%), free cash flow +36% to $2.3B. Most importantly: organic growth accelerated each quarter and exited at a 5-6% annual rate — directly resolving the deceleration concern from prior reviews.</span></div>
+    <div class="kv"><span class="kv-k">(c) EPS estimates updated</span><span class="kv-v">Modestly. VL's FY26 EPS estimate of $5.50 was confirmed by the actual $5.51. VL's FY27 estimate of $5.90 remains in play; management guided 7-9% adjusted EPS growth for FY27, implying ~$5.90-$5.96 — essentially aligned with VL. No material change required.</span></div>
+    <div class="kv"><span class="kv-k">(d) FG/VL divergence</span><span class="kv-v">FG's 7Y growth rate (7.57%) vs VL's 7.5% projected revenue CAGR — no material divergence, no dual-scenario treatment required.</span></div>
+    <div class="kv"><span class="kv-k">(e) Pending M&amp;A / rumor search</span><span class="kv-v grn">No new acquisition rumors found. Paycor (completed April 2025) and SixFifty ($85M, July 2025) are the only recent acquisitions. Director sale on June 26 (3,907 shares by J.M. Tucci) was a routine option exercise near 10-year expiration — not a fundamental signal. Stated affirmatively: no pending/rumored M&amp;A activity identified as of June 30, 2026.</span></div>
+  </div>
+
+  <div class="hdr">Sector Protocol Activation</div>
+  <div class="section-note">Standard protocol. No BDC/REIT/Semiconductor/Industrial trigger. Beta 0.90, Earnings Predictability 95/100. AI partial-displacement penalty retained — reviewed in Gate 3 below.</div>
+
+  <div class="hdr">Module 2 — Safety Score</div>
+  <table>
+    <colgroup><col style="width:46%"><col style="width:34%"><col style="width:20%"></colgroup>
+    <thead><tr><th>Component</th><th>Input</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td>Credit Base (S&amp;P BBB+)</td><td>BBB+ &rarr; 6.5</td><td>6.5</td></tr>
+      <tr><td>Growth Bonus (5-yr Div CAGR ~8%)</td><td>8% &gt; 5%, approaching 10%</td><td class="grn">+1.0</td></tr>
+      <tr><td>Zombified Capital Test</td><td>LT Debt/Capital 55.23% (FG) / 53% (VL) — both below 60% threshold. Revenue growth ~7.5% comfortably above the 2% floor. CLEAR — but monitor as Paycor debt rolls down.</td><td>0.0</td></tr>
+      <tr><td>AI Displacement Penalty</td><td>Credible but unconfirmed bear thesis retained — AI could commoditize payroll processing; WISE is management's counter but independent verification of commercial effectiveness remains limited</td><td class="amb">&minus;0.5 (partial)</td></tr>
+      <tr><td><strong>Safety Score</strong></td><td></td><td><strong>7.0 / 10</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="section-note">LT Debt/Capital has risen to 55.23% on FG vs. VL's 53% figure — both still below the 60% Zombified Capital trigger, but a real increase from the pre-Paycor period ($799M LT debt in FY24 vs. $4,548M in FY25 per VL). The AI penalty remains soft/partial; the Q4 call's WISE disclosures (600 AI agents, 26 trillion data points, 10,000 timekeeping customers) move the needle slightly but don't yet constitute independent verification of commercial impact.</div>
+
+  <div class="hdr">Structural Audit — SQ Qualifier Gates</div>
+  <table>
+    <colgroup><col style="width:22%"><col style="width:56%"><col style="width:22%"></colgroup>
+    <thead><tr><th>Gate</th><th>Test</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>7.1.1 Sustainability</td><td>Yield 4.84% — approaching but just under the 5% secular-decline trigger. Dividend covered by cash flows (74% cash payout ratio); EPS payout ratio ~87% is high on a GAAP basis but covered by FCF. Dividend has grown for 12 consecutive years at ~9.9% CAGR.</td><td><span class="badge badge-warn">CAUTION — not a hard fail, monitor</span></td></tr>
+      <tr><td>7.1.8 Buyback Auth.</td><td>Capital directed to dividends, Paycor debt service, and $611M in buybacks from strong FCF. Not a buyback-driven EPS story — organic earnings growth is the primary driver.</td><td><span class="badge badge-pass">PASS</span></td></tr>
+      <tr><td>7.1.9 Ghost Yield</td><td>Div/FCF: ~$4.39/share dividend vs. ~$6.41/share FCF per share — payout ratio ~69% on a FCF basis. CLEAR.</td><td><span class="badge badge-pass">PASS</span></td></tr>
+      <tr><td>7.1.3 AI Displacement</td><td>Partial penalty applied in Safety Score. WISE is management's defensive response; not yet confirmed as a moat-reinforcing tool with independent data.</td><td><span class="badge badge-warn">FLAGGED — partial penalty, monitor</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="hdr">Pre-Verdict Checklist — Gate 2: Segment Completeness</div>
+  <table>
+    <colgroup><col style="width:28%"><col style="width:14%"><col style="width:34%"><col style="width:24%"></colgroup>
+    <thead><tr><th>Segment</th><th>% Revenue</th><th>Bear Assumption</th><th>Trough EPS Contribution</th></tr></thead>
+    <tbody>
+      <tr><td>Management Solutions — organic</td><td>~56%</td><td>Organic growth re-decelerates below 3% as Paycor comparison lap exhausts; revenue-per-client remains soft</td><td>Still the largest, most durable base — even at 2-3% growth this anchors the business</td></tr>
+      <tr><td>Management Solutions — Paycor-driven</td><td>~19%</td><td>Cross-sell synergies disappoint post-integration; enterprise wins slow after "strongest booking dollar volume" in Q4</td><td>Swing factor; risk of Paycor overhang reducing excitement once the comp period rolls over</td></tr>
+      <tr><td>PEO &amp; Insurance Solutions</td><td>~25%</td><td>White-collar recession materializes; worksite employee headcount declines vs. record retention seen in FY26</td><td>Moderately resilient historically — high single-digit FY26 growth suggests durability even in macro softness</td></tr>
+    </tbody>
+  </table>
+  <div class="section-note"><strong>Bear case portability test: passes.</strong> If Paycor integration disappoints, the organic Management Solutions + PEO base (~81% of revenue) still generates a positive earnings floor well above the dividend. Estimated bear-case EPS floor: ~$5.20-$5.40 for FY27, well above the $4.39/share dividend — no ghost-yield risk in the trough scenario.</div>
+
+  <div class="hdr">Pre-Verdict Checklist — Gate 3: Platform Optionality</div>
+  <table>
+    <colgroup><col style="width:30%"><col style="width:26%"><col style="width:22%"><col style="width:22%"></colgroup>
+    <thead><tr><th>Optionality Item</th><th>Status</th><th>Probability</th><th>Revenue Date</th></tr></thead>
+    <tbody>
+      <tr><td>WISE AI platform (Workforce Intelligence Strengthened by Expertise)</td><td>Formally launched May 2026; 600+ AI agents, 26T proprietary data points, 10K timekeeping customers, ~70% error reduction per management</td><td><span class="badge badge-core">Medium ~45% (improving — more specific than prior disclosures)</span></td><td>2027-2028 for measurable retention/pricing impact; no independent verification yet</td></tr>
+      <tr><td>Paycor cross-sell into mid-market/enterprise</td><td>Exceeded FY26 synergy targets; &gt;$100M cost savings; management guiding "stronger contribution next year"; enterprise at 13-year retention high</td><td><span class="badge badge-pass">High &gt;70% — already flowing</span></td><td>FY2027 — confirmed, included in Updated Base</td></tr>
+      <tr><td>Enterprise upmarket expansion</td><td>"Highest booking dollar volume we've had all year" in Q4; enterprise clients targeting January 1 start date</td><td><span class="badge badge-core">Medium-High ~60%</span></td><td>FY2027 ongoing</td></tr>
+      <tr><td>PEO segment continued growth</td><td>Record worksite employee retention; high single-digit FY26 growth; insurance agency drag remains but "positive trends"</td><td><span class="badge badge-pass">High &gt;70%</span></td><td>Ongoing through lock-up</td></tr>
+    </tbody>
+  </table>
+  <div class="section-note">No platform premium applied. WISE does not yet meet the high-probability, revenue-validated bar required under Gate 3e — though probability has modestly improved from prior analysis based on more specific Q4 call disclosures. Paycor cross-sell is now the strongest, most confirmed optionality item and is folded into the Updated Base case rather than a separate bull scenario.</div>
+
+  <div class="hdr">Module 13 — SQ Valuation Governor</div>
+  <table>
+    <colgroup><col style="width:30%"><col style="width:24%"><col style="width:24%"><col style="width:22%"></colgroup>
+    <thead><tr><th>Input</th><th>VL Base</th><th>Updated Base</th><th>Bear</th></tr></thead>
+    <tbody>
+      <tr><td>Forward EPS Growth (3–5yr)</td><td>7.5% (VL stated)</td><td>7-9% (mgmt FY27 guide)</td><td>~4-5% (organic only, no Paycor tailwind)</td></tr>
+      <tr><td>Current Yield</td><td>4.84%</td><td>4.84%</td><td>4.84%</td></tr>
+      <tr><td>Quality Score (avg VL/FG)</td><td>~15 (FG 87, VL EP 95)</td><td>~15.5</td><td>~12</td></tr>
+      <tr><td>SQ Target P/E (formula)</td><td>~16.5x</td><td>~17.0x</td><td>15.0x (MAV-capped, growth &lt;5%)</td></tr>
+      <tr><td><strong>Final SQ Target P/E</strong></td><td><strong>16.5x</strong></td><td><strong>17.0x</strong></td><td><strong>15.0x</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="section-note">FG's Normal P/E of 25.57x reflects PAYX's historical premium-growth-compounder valuation during higher-organic-growth periods. At current organic growth rates (~5-6%), the SQ formula's 16-17x range is the more appropriate anchor. Current blended P/E at 17.72x (FG) sits just above the Updated Base SQ Target P/E — the stock is roughly fairly valued, not discounted.</div>
+
+  <div class="hdr">Module 14 — 2030 Back-Calc (Ultimate Arbiter)</div>
+  <table>
+    <colgroup><col style="width:28%"><col style="width:13%"><col style="width:14%"><col style="width:15%"><col style="width:13%"><col style="width:17%"></colgroup>
+    <thead><tr><th>Scenario</th><th>2030 EPS</th><th>Target P/E</th><th>2030 Price</th><th>+Div (4yr)</th><th>IRR from $98.33</th></tr></thead>
+    <tbody>
+      <tr><td>(a) VL Base</td><td>$7.00</td><td>16.5x</td><td>$115.50</td><td>$19.50</td><td class="amb">~8.5%</td></tr>
+      <tr><td>(b) Updated Base</td><td>$7.20</td><td>17.0x</td><td>$122.40</td><td>$19.80</td><td class="grn">~10.1%</td></tr>
+      <tr><td>(c) Bear (organic decay, Paycor fades)</td><td>$5.80</td><td>15.0x</td><td>$87.00</td><td>$18.50</td><td class="amb">~1.3%</td></tr>
+      <tr><td>(d) Bull (WISE monetizes, cross-sell accelerates)</td><td>$8.00</td><td>19.5x</td><td>$156.00</td><td>$20.50</td><td class="grn">~16.0%</td></tr>
+    </tbody>
+  </table>
+  <div class="section-note">The Updated Base barely clears the 10% hurdle at 10.1% — a meaningful improvement from the prior analysis where it didn't clear at $98.24, driven by the Q4 beat and Q4 FY27 guidance alignment, not a price difference. The VL Base misses at 8.5%. <strong>The stock is priced for the good news to be true, leaving minimal cushion if FY27 execution falters.</strong></div>
+
+  <div class="hdr">Pre-Verdict Checklist — Gate 4: Bull Case Steel Man</div>
+  <table>
+    <colgroup><col style="width:30%"><col style="width:18%"><col style="width:38%"><col style="width:14%"></colgroup>
+    <thead><tr><th>Steel Man Argument</th><th>Source</th><th>Adversarial Counterpoint</th><th>Conceded</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>SM-1:</strong> Organic growth reacceleration to a 5-6% exit rate directly resolves the prior framework's central concern — this is no longer an open question, it's answered data. The specific risk that kept this at WAIT has been eliminated.</td>
+        <td>Q4 FY26 confirmed results; management commentary on quarter-over-quarter acceleration</td>
+        <td>The organic growth question is resolved, but the verdict was never purely about organic growth — it's about whether the 10% IRR hurdle is cleared at the current entry price. Resolving the growth question improves the IRR outlook but doesn't auto-generate a BUY signal; the Updated Base IRR at $98.33 clears by only 10 basis points (10.1%), not enough to call this LEADERSHIP-tier clearance.</td>
+        <td><span class="badge badge-warn">Partial</span></td>
+      </tr>
+      <tr>
+        <td><strong>SM-2:</strong> At 17.72x blended P/E against a 25x+ historical normal P/E, PAYX is at a multi-year valuation low relative to its own history — a genuine margin of safety for a high-quality compounder.</td>
+        <td>FG historical Normal P/E 25.57x; current blended P/E 17.72x — a ~31% discount to history</td>
+        <td>The historical 25x+ multiple was earned during 7-9% organic revenue growth periods. Current organic growth of 5-6% is real but below the level that historically justified that premium. The 17x SQ Target P/E is the more appropriate reference; the discount to 25x history partly reflects a structural downshift in growth rate, not purely sentiment-driven opportunity.</td>
+        <td><span class="badge badge-warn">Partial</span></td>
+      </tr>
+      <tr>
+        <td><strong>SM-3:</strong> FY27 EPS growth guide of 7-9% is management's own number, exceeded synergy targets confirm execution quality, and enterprise booking momentum + PEO record retention indicate the business is genuinely re-accelerating — not holding steady.</td>
+        <td>Q4 FY26 earnings call; synergy targets exceeded; enterprise retention at 13-year high per Gibson</td>
+        <td>This is accurate and the most credible part of the bull case. Cannot fully rebut — the operational evidence is real. Does not change the valuation math at $98.33 but directly supports conviction in holding the existing position at cost basis.</td>
+        <td><span class="badge badge-pass">Conceded</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-note">2 partial concessions + 1 full concession. Does not reach the 2-full-concession threshold for a mandatory verdict upgrade under Rule AA-2. WAIT FOR STRIKE confirmed rather than overridden.</div>
+
+  <div class="adv">
+    <div class="adv-lbl">Adversarial Analyst — Bear Case Commentary</div>
+    <div class="adv-body">
+      <p>The bear case here is not as fierce as it was three months ago — the specific feared outcome (continuing organic decay) was resolved in the opposite direction. What's left is more mundane: the stock at $98.33 is essentially at the SQ formula's fair value in the Updated Base. That's a "you're paying a fair price for a good business" signal — a fundamentally different proposition from "you're getting a margin-of-safety entry on a great business." The 10 basis points of IRR clearance (10.1%) is not the kind of cushion this framework is designed to call a confident BUY.</p>
+    </div>
+    <div class="sym-lbl">Bear Case Weaknesses (Rule AA-3 Symmetry)</div>
+    <div class="adv-body">
+      <p><strong>Bear weakness 1:</strong> The macro fear that drove much of the selloff (white-collar recession, AI displacement) has not shown up in Paychex's own numbers — enterprise retention at a 13-year high, PEO worksite employee retention at a record, Q4 revenue accelerating to +12%. The bear narrative remains hypothetical while the bull results are actual.</p>
+      <p><strong>Bear weakness 2:</strong> WISE's early metrics (70% error reduction, 10K timekeeping customers), while modest, are directionally positive. If even one quarter provides evidence of measurable revenue attribution or retention impact, the optionality probability rises enough to justify a modest platform premium — which would push the Updated Base IRR above 10% more comfortably.</p>
+    </div>
+  </div>
+
+  <div class="hdr">Pre-Verdict Checklist — Gate 5: Strike Price Calibration</div>
+  <table>
+    <colgroup><col style="width:16%"><col style="width:13%"><col style="width:30%"><col style="width:13%"><col style="width:14%"><col style="width:14%"></colgroup>
+    <thead><tr><th>Tier</th><th>Price</th><th>Basis</th><th>IRR at Tier</th><th>Upside Trigger</th><th>Downside Trigger</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Margin of Safety</strong></td>
+        <td><strong>$81&ndash;$90</strong></td>
+        <td>Updated Base EPS at 17.0x SQ P/E clears the hurdle comfortably at this level</td>
+        <td class="grn">~13-16%</td>
+        <td>Organic growth holds 5%+; WISE shows retention data; enterprise momentum continues</td>
+        <td>Macro recession; organic re-deceleration; Paycor integration costs exceed plan</td>
+      </tr>
+      <tr>
+        <td><strong>Speculative Entry</strong></td>
+        <td><strong>$90&ndash;$98</strong></td>
+        <td>Barely clears Updated Base; requires guidance execution to be realized</td>
+        <td class="amb">~10-11%</td>
+        <td>Same as above</td>
+        <td>Same as above</td>
+      </tr>
+      <tr>
+        <td><strong>Current price</strong></td>
+        <td><strong>$98.33</strong></td>
+        <td>Just above the Speculative Entry tier; essentially at SQ fair value in the Updated Base</td>
+        <td class="amb">~10.1%</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="hdr">Gate 6 — Tax Mechanics (Taxable Account)</div>
+  <div class="section-note">For a plain equity holding like PAYX, tax treatment is straightforward: dividends are qualified (taxed at preferential LTCG rates once the 60-day holding period is met, not ordinary income). The 4.84% yield costs roughly 1.15 points after-tax at top bracket rates (~3.7% effective after-tax yield). No ROC, Section 1256, or derivative income complexity applies. Tax characterization: <strong>complete.</strong></div>
+
+  <div class="hdr">Classification &amp; Unified Verdict</div>
+  <table>
+    <colgroup><col style="width:40%"><col style="width:60%"></colgroup>
+    <tbody>
+      <tr><td>1. Safety Check (≥6.0, no Rot)</td><td><span class="badge badge-pass">PASS — 7.0/10</span></td></tr>
+      <tr><td>2. Quality Check (SQ Target P/E)</td><td><span class="badge badge-neutral">16.5x VL Base / 17.0x Updated Base</span></td></tr>
+      <tr><td>3. Hurdle Check (IRR ≥10% base)</td><td><span class="badge badge-warn">MARGINAL — 10.1% Updated Base (barely clears), 8.5% VL Base (misses)</span></td></tr>
+      <tr><td>Classification</td><td><span class="badge badge-core">CORE</span> — IRR clears 10% in one of two base-case framings (marginally). Income vehicle with 4.84% yield, strong FCF coverage, and operational re-acceleration confirmed.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hdr">Tri-Line Audit</div>
+  <div class="triline">
+    <div class="triline-lbl">Engine</div>
+    <div class="triline-body">PAYX's core engine — recurring, contracted HCM/payroll for ~800,000 SMBs — remains genuinely high-quality, now augmented by Paycor's mid-market reach and the emerging WISE AI layer. The Q4 print confirmed organic reacceleration, Paycor integration ahead of plan, and PEO at record retention. The business is executing cleanly against the targets it set for itself.</div>
+  </div>
+  <div class="triline">
+    <div class="triline-lbl">Friction</div>
+    <div class="triline-body">The friction has shifted. The prior question was "is the organic engine decaying?" — that's answered: no. The new question is "is the current price right for the level of growth on offer?" The Updated Base IRR clears at barely 10.1% — the stock is priced for the good news to be true, leaving minimal cushion if execution falters in FY27. Additionally, LT Debt/Capital at 53-55% (elevated from the Paycor acquisition) and a dividend payout ratio approaching 87% on a GAAP EPS basis are real, if manageable, balance sheet tensions.</div>
+  </div>
+  <div class="triline">
+    <div class="triline-lbl">Exit</div>
+    <div class="triline-body">By 2030, if organic growth holds at 5-6%, WISE generates some demonstrable retention or pricing uplift, and Paycor cross-sell sustains, EPS of $7.00-$7.20 at 16.5-17.0x produces a $115-122 terminal value plus ~$20 in dividends — total return of ~$135-142 from a $98.33 entry, producing the ~10% IRR. Thin but real. The bull case ($156+ from WISE monetization) is plausible; the bear case ($87 from organic re-deceleration) remains a real risk and produces near-breakeven inclusive of dividends.</div>
+  </div>
+
+  <div class="verdict-block" style="margin-top:1.25rem;">
+    <div class="verdict-title">&#8987; WAIT FOR STRIKE / HOLD — CORE Classification</div>
+    <div class="verdict-sub">
+      <strong>Margin of Safety Entry: $81&ndash;$90</strong> (clears hurdle comfortably under both VL and Updated Base)<br>
+      <strong>Speculative Entry: $90&ndash;$98</strong> (barely clears Updated Base; requires execution)<br>
+      <strong>Current price $98.33:</strong> essentially at fair value — not a new-capital entry point<br><br>
+      <strong>For existing holders:</strong> Hold. The thesis is intact, organic growth concern resolved favorably, and the business is executing. No fundamental case for selling or trimming.<br>
+      <strong>For new capital:</strong> Current price at $98.33 is at the very top of the acceptable range. Conviction entry remains $81&ndash;$90. Strike alert tightened to $90 (from $95 in prior review) reflecting the resolved organic growth uncertainty.
+    </div>
+  </div>
+
+  <div class="footer-note">Upgrade triggers (Q1 FY2027, ~late September 2026): WISE retention/revenue data disclosed; organic growth holds above 5% for 2+ consecutive quarters; macro softness fails to materialize in PAYX client data; interest on client funds tracks to the $195-205M FY27 guide.<br>
+  Downgrade triggers: organic re-deceleration in Q1 FY27; Paycor integration cost overruns; dividend growth slows below 6%; PEO worksite employee headcount declines materially.<br><br>
+  Hybrid Portfolio Architect V4.2.1 — DSM Engine &middot; Generated for personal use &middot; Not financial advice</div>
+
+</div>
+</body>
+</html>
